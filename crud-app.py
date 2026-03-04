@@ -110,3 +110,22 @@ if data:
                         worksheet.update_cell(selected_row_update, 2, new_qty)
                     st.success("資料已成功更新！")
                     st.rerun()
+    # ==========================================
+    # 6. 刪除資料 (Delete)
+    # ==========================================
+    with col_delete:
+        st.header("4️⃣ 刪除資料")
+
+        # 讓使用者選擇要刪除哪一筆
+        selected_option_del = st.selectbox("選擇要刪除的資料", options=list(row_options.keys()), key="delete_select")
+        selected_row_del = row_options[selected_option_del]
+
+        st.write(f"⚠️ 即將刪除：**{selected_option_del}**")
+
+        # 刪除按鈕 (加上 type="primary" 讓按鈕變顯眼)
+        if st.button("🗑️ 確認刪除這筆資料", type="primary"):
+            with st.spinner("正在刪除資料中..."):
+                worksheet.delete_rows(selected_row_del)
+            st.success("資料已成功刪除！")
+            st.rerun()
+
